@@ -38,8 +38,6 @@ shape_meta: &shape_meta
         novel_view: False
         batch_size: 64
         aug_img_num: 11
-        reference_img_names:
-          - clean_reference.png
         view_keys:
           - camera_3
           - camera_4
