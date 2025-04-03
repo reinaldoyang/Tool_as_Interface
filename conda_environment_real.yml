@@ -215,7 +215,7 @@ dependencies:
     - mmpose==0.28.0
     - model-index==0.1.11
     - moviepy==1.0.3
-    - mujoco==2.3.7
+    - mujoco==3.2.3
     - multidict==6.0.5
     - munkres==1.1.4
     - natsort==8.4.0
@@ -339,7 +339,7 @@ dependencies:
     # requires librealsense https://github.com/IntelRealSense/librealsense/blob/master/doc/distribution_linux.md
     - pyrealsense2==2.55.1.6486
     - ur-rtde==1.5.9
-    - https://artifactory.kinovaapps.com:443/artifactory/generic-public/kortex/API/2.6.0/kortex_api-2.6.0.post3-py3-none-any.whl
+    # - https://artifactory.kinovaapps.com:443/artifactory/generic-public/kortex/API/2.6.0/kortex_api-2.6.0.post3-py3-none-any.whl
     - spnav @ https://github.com/cheng-chi/spnav/archive/c1c938ebe3cc542db4685e0d13850ff1abfdb943.tar.gz
     - -e ti/devices/gello_software/third_party/DynamixelSDK/python/
     - -e ti/devices/gello_software/
