@@ -72,7 +72,8 @@ We recommend using [Mambaforge](https://gyithub.com/conda-forge/miniforge#mambaf
     export AM_I_DOCKER=False
     export BUILD_WITH_CUDA=True
     export CUDA_HOME=/usr/local/cuda-11.8
-
+    
+    pip install https://artifactory.kinovaapps.com:443/artifactory/generic-public/kortex/API/2.6.0/kortex_api-2.6.0.post3-py3-none-any.whl
     pip install --no-build-isolation -e third_party/Grounded-Segment-Anything/GroundingDINO
     pip install mmcv-full -f https://download.openmmlab.com/mmcv/dist/cu118/torch2.0.0/index.html
     pip install third_party/Grounded-Segment-Anything/grounded-sam-osx/transformer_utils
