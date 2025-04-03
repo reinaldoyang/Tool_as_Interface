@@ -39,10 +39,6 @@ class MultiRealsense:
         enable_color=True,
         enable_depth=True,
         enable_infrared=False,
-        enable_pointcloud=False,
-        process_pcd=False,
-        draw_keypoints=False,
-        keypoint_kwargs=None,
         get_max_k=30,
         advanced_mode_config: Optional[Union[dict, List[dict]]]=None,
         transform: Optional[Union[Callable[[Dict], Dict], List[Callable]]]=None,
@@ -97,15 +93,10 @@ class MultiRealsense:
         self.cameras = cameras
         self.shm_manager = shm_manager
         
-        self.enable_pointcloud = enable_pointcloud
-        self.process_pcd = process_pcd
         self.draw_keypoints = draw_keypoints
-        self.keypoint_kwargs = keypoint_kwargs
         
         self.transform = transform
         
-        self.prev_trans_local_world = [None]*2
-        self.prev_trans_local_world_vis = [None]*2
         
 
     def __enter__(self):
@@ -191,24 +182,6 @@ class MultiRealsense:
             out = dict()
             for key in results[0].keys():
                 out[key] = np.stack([x[key] for x in results])
-                
-        if self.enable_pointcloud:
-            boundaries = {'x_lower': -0.15, 'x_upper': 0.38, 'y_lower': -0.55, 'y_upper': 0.125, 'z_lower': -0.02, 'z_upper': 0.07}
-
-            # shape: (n_cameras, H, W, C)
-            colors = out['color'][..., ::-1] # please note that the color should be in RGB
-            depths = out['depth'] 
-            intrinsics = out['intrinsics']
-            extrinsics = out['extrinsics']
-            dist_coeffs = out['dist_coeffs']
-            
-            keypoints_world, all_trans_local_world = extract_keypoint_from_img(colors, depths, intrinsics, extrinsics, boundaries, self.prev_trans_local_world_vis, **self.keypoint_kwargs)
-            self.prev_trans_local_world_vis = all_trans_local_world
-            keypoints_world = np.concatenate(keypoints_world, axis=0)
-            if self.draw_keypoints:
-                for camera_idx in range(self.n_cameras):
-                    draw_keypoints_on_image(camera_idx, keypoints_world, colors, intrinsics, extrinsics, dist_coeffs)
-
 
         return out
     
