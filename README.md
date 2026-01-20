@@ -58,15 +58,26 @@ We recommend using [Mambaforge](https://gyithub.com/conda-forge/miniforge#mambaf
 3. Update `mamba`, and create and activate the environment:
 
     To update `mamba` and create the environment, use the following commands:
+    mamba not workingg do this:
+    eval "$(mamba shell hook --shell bash)"
 
     ```console
     mamba install mamba=1.5.1 -n base -c conda-forge
     mamba env create -f conda_environment_real.yml
     mamba activate ti
     ```
+    if you prefer to use conda instead
+    ```
+    conda env create -f conda_environment_real.yml
+
+    ```
+    for the pytorch 3d issue, use the pytorch 2.7.1
+    https://blog.csdn.net/qq_65003461/article/details/154837437?spm=1001.2101.3001.6650.3&utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EYuanLiJiHua%7ECtr-3-154837437-blog-140304496.235%5Ev43%5Epc_blog_bottom_relevance_base6&depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EYuanLiJiHua%7ECtr-3-154837437-blog-140304496.235%5Ev43%5Epc_blog_bottom_relevance_base6&utm_relevant_index=5
 
 
 4. Install packages:
+when installing groundDino, if you encountered conversion error, change the ms_deform_attn_cuda.cu type() to scalar_type()
+
     ```console
     # grounded sam
     export AM_I_DOCKER=False
@@ -86,6 +97,9 @@ We recommend using [Mambaforge](https://gyithub.com/conda-forge/miniforge#mambaf
     CMAKE_PREFIX_PATH=$CONDA_PREFIX/lib/python3.10/site-packages/pybind11/share/cmake/pybind11 console build_all_conda.sh
     cd ../..
     ```
+    for the foundation pose console not found error use this command instead 
+    CMAKE_PREFIX_PATH=$CONDA_PREFIX/lib/python3.10/site-packages/pybind11/share/cmake/pybind11 bash build_all_conda.sh
+
 
 5. Download the checkpoints
     ```console
